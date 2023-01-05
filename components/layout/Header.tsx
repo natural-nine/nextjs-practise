@@ -16,11 +16,12 @@ const Header = () => {
 
 const Wrap = styled.section`
   width: 100%;
-  height: 7rem;
+  height: 6rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0px 30px;
+  border-bottom: 0.5px solid #bdc3c7;
 `;
 const HomeBox = styled.div`
   width: 20%;

@@ -15,7 +15,7 @@ const Toggle = () => {
         <input type="checkbox" checked={toggle} onChange={toggleChange} />
         <span className={classes.slider}></span>
       </label>
-      <span>{toggle ? "Light" : "Dark"}</span>
+      <span>{toggle ? "Dark" : "Light"}</span>
     </Wrap>
   );
 };
