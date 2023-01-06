@@ -3,13 +3,37 @@ import { useState } from "react";
 import styled from "styled-components";
 import Search from "../components/Search";
 import _ from "lodash";
+import CountriesList from "../components/CountriesList";
+interface ICurrencies {
+  symbol: string;
+}
 
-export default function Home(props: any) {
+interface ILanguages {
+  name: string;
+}
+interface ICountriesTypes {
+  name: string;
+  population: number;
+  area: number;
+  flag: string;
+  latlng: number[];
+  alpha3Code: string;
+  borders: string[];
+  languages: ILanguages[];
+  capital: string;
+  nativeName: string;
+  currencies: ICurrencies[];
+  region: string;
+}
+
+export default function Home({props}: any) {
   const [search, setSearch] = useState<string>("");
   const allCountries = props.data.slice(0, 100);
 
-  const searchCountries = allCountries.filter((country: any) =>
-    country.name.toLowerCase().includes(search)
+  const searchCountries = allCountries.filter(
+    (country: any) =>
+      country.name.toLowerCase().includes(search) ||
+      country.region.toLowerCase().includes(search)
   );
 
   const countriesChange = _.debounce(
@@ -18,17 +42,16 @@ export default function Home(props: any) {
     },
     500
   );
-
-  console.log(searchCountries);
   return (
     <Wrap>
       <SearchBar>
         <h1>Founded {allCountries.length} Countires</h1>
         <Search
           onChange={countriesChange}
-          placeholder="Filter by Name, Region or SubRegion"
+          placeholder="Filter by Name or Region"
         />
       </SearchBar>
+      <CountriesList searchCountries={searchCountries}/>
     </Wrap>
   );
 }
@@ -54,7 +77,7 @@ const SearchBar = styled.div`
 export const getStaticProps = async () => {
   try {
     const response = await axios.get("https://restcountries.com/v2/all");
-    const { data }: any = response;
+    const { data } = response;
     return {
       props: {
         data,
