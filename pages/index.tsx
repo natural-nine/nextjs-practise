@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState } from "react";
 import styled from "styled-components";
 import Search from "../components/Search";
@@ -6,7 +5,6 @@ import _ from "lodash";
 import CountriesList from "../components/CountriesList";
 import { ICountriesTypes, IdataTypes } from "../types/contriesTypes";
 import { getAllCountries } from "../helpers/apis";
-import { GetStaticProps } from "next";
 
 export default function Home({ data }: IdataTypes) {
   const [search, setSearch] = useState<string>("");

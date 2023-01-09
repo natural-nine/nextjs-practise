@@ -5,6 +5,7 @@ import { useState } from "react";
 import { orderContries } from "../helpers/contriesFilter";
 import { IToggleTpyes } from "../types/toggleTypes";
 import { ICountriesTypes } from "../types/contriesTypes";
+import Link from "next/link";
 
 const CountriesList = ({
   searchCountries,
@@ -51,14 +52,18 @@ const CountriesList = ({
         </div>
       </CountiresHeader>
       {orderedCountries?.map(item => (
-        <CountriesBox key={item.name}>
-          <NameBox>
-            <Image src={item.flag} width={80} height={35} alt="flag" />
-            <h1>{item.name}</h1>
-          </NameBox>
-          <PopBox>{item.population && item.population.toLocaleString()}</PopBox>
-          <AreaBox>{item.area && item.area.toLocaleString()} ㎢</AreaBox>
-        </CountriesBox>
+        <Link href={`country/${item.alpha3Code.toLocaleLowerCase()}`}>
+          <CountriesBox key={item.name}>
+            <NameBox>
+              <Image src={item.flag} width={80} height={35} alt="flag" />
+              <h1>{item.name}</h1>
+            </NameBox>
+            <PopBox>
+              {item.population && item.population.toLocaleString()}
+            </PopBox>
+            <AreaBox>{item.area && item.area.toLocaleString()} ㎢</AreaBox>
+          </CountriesBox>
+        </Link>
       ))}
     </Wrap>
   );
