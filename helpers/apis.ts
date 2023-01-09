@@ -1,5 +1,6 @@
 import axios from "axios";
 import { IdataTypes } from "../types/contriesTypes";
+import { ICountryDataTypes } from "../types/countryTypes";
 
 export const getAllCountries = async () => {
   const response = await axios.get("https://restcountries.com/v2/all");
@@ -9,13 +10,14 @@ export const getAllCountries = async () => {
 
 export const getCountry = async () => {
   const allCountries = await getAllCountries();
-  return allCountries.data.filter(item => item.alpha3Code);
+  const filterCode = allCountries.data.filter(item => item.alpha3Code);
+  return filterCode;
 };
 
 export const getCountryByName = async (alphaCode: string) => {
   const response = await axios.get(
-    `https://restcountries.com/v2/alpha3Code/${alphaCode}`
+    `https://restcountries.com/v2/alpha/${alphaCode}`
   );
-  const data = response;
+  const data:ICountryDataTypes = response;
   return data;
 };

@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { FaSistrix } from "react-icons/fa";
 const Search = ({ ...rest }) => {
   return (
     <SearchBox>
