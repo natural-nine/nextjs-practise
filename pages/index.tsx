@@ -4,34 +4,15 @@ import styled from "styled-components";
 import Search from "../components/Search";
 import _ from "lodash";
 import CountriesList from "../components/CountriesList";
-interface ICurrencies {
-  symbol: string;
-}
+import { ICountriesTypes, IdataTypes } from "../types/contriesTypes";
+import { getAllCountries } from "../helpers/apis";
+import { GetStaticProps } from "next";
 
-interface ILanguages {
-  name: string;
-}
-interface ICountriesTypes {
-  name: string;
-  population: number;
-  area: number;
-  flag: string;
-  latlng: number[];
-  alpha3Code: string;
-  borders: string[];
-  languages: ILanguages[];
-  capital: string;
-  nativeName: string;
-  currencies: ICurrencies[];
-  region: string;
-}
-
-export default function Home({props}: any) {
+export default function Home({ data }: IdataTypes) {
   const [search, setSearch] = useState<string>("");
-  const allCountries = props.data.slice(0, 100);
-
+  const allCountries = data.slice(0, 100);
   const searchCountries = allCountries.filter(
-    (country: any) =>
+    (country: ICountriesTypes) =>
       country.name.toLowerCase().includes(search) ||
       country.region.toLowerCase().includes(search)
   );
@@ -51,7 +32,7 @@ export default function Home({props}: any) {
           placeholder="Filter by Name or Region"
         />
       </SearchBar>
-      <CountriesList searchCountries={searchCountries}/>
+      <CountriesList searchCountries={searchCountries} />
     </Wrap>
   );
 }
@@ -76,8 +57,7 @@ const SearchBar = styled.div`
 
 export const getStaticProps = async () => {
   try {
-    const response = await axios.get("https://restcountries.com/v2/all");
-    const { data } = response;
+    const { data }: IdataTypes = await getAllCountries();
     return {
       props: {
         data,
