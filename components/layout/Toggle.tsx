@@ -7,7 +7,6 @@ const Toggle = () => {
   const toggleChange = () => {
     setToggle((toggle: boolean) => !toggle);
   };
-  console.log(toggle);
   return (
     <Wrap>
       <span>Theme Mode :</span>

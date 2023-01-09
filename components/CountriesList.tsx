@@ -1,71 +1,63 @@
 import styled from "styled-components";
 import Image from "next/image";
-import Button from "./Button";
-import { useRef, useState } from "react";
+import Arrow from "./Arrow";
+import { useState } from "react";
+import { orderContries } from "../helpers/contriesFilter";
+import { IToggleTpyes } from "../types/toggleTypes";
+import { ICountriesTypes } from "../types/contriesTypes";
 
-const order = (countries: any, direction: string) => {
-  if (direction === "asc") {
-    return countries.sort((a: any, b: any) =>
-      a.population > b.population ? 1 : -1
-    );
-  }
-  if (direction === "desc") {
-    return countries.sort((a: any, b: any) =>
-      a.population > b.population ? -1 : 1
-    );
-  }
-  if (direction === "") {
-    return countries;
-  }
-};
-
-const CountriesList = ({ searchCountries }: any) => {
-  const orderToggles = {
-    name: false,
-    population: true,
+const CountriesList = ({
+  searchCountries,
+}: {
+  searchCountries: ICountriesTypes[];
+}) => {
+  const [orderToggle, setOrderToggle] = useState<IToggleTpyes>({
+    name: true,
+    population: false,
     area: false,
-  };
-  const [orderToggle, setOrderToggle] = useState(orderToggles);
-  const orderedCountries = order(searchCountries, "");
-  console.log(orderToggle);
+  });
+  const [sortToggle, setSortToggle] = useState<string>("name");
+  const orderedCountries = orderContries(searchCountries, sortToggle);
+
   return (
     <Wrap>
       <CountiresHeader>
         <div>
           <h2>Name</h2>
-          <Button
-            setOrderToggle={setOrderToggle}
+          <Arrow
             toggle={"name"}
+            setOrderToggle={setOrderToggle}
             orderToggle={orderToggle}
+            setSortToggle={setSortToggle}
           />
         </div>
         <div>
           <h2>Population</h2>
-          <Button
+          <Arrow
             toggle={"population"}
             orderToggle={orderToggle}
             setOrderToggle={setOrderToggle}
+            setSortToggle={setSortToggle}
           />
         </div>
         <div>
           <h2>Area</h2>
-          <Button
+          <Arrow
             toggle={"area"}
             orderToggle={orderToggle}
             setOrderToggle={setOrderToggle}
+            setSortToggle={setSortToggle}
           />
         </div>
       </CountiresHeader>
-      {orderedCountries.map((item: any, idx: any) => (
+      {orderedCountries?.map(item => (
         <CountriesBox key={item.name}>
           <NameBox>
             <Image src={item.flag} width={80} height={35} alt="flag" />
             <h1>{item.name}</h1>
           </NameBox>
-          <PopBox>
-            {item.population && item.population.toLocaleString(2)}
-          </PopBox>
-          <AreaBox>{item.area && item.area.toLocaleString(2)} ㎢</AreaBox>
+          <PopBox>{item.population && item.population.toLocaleString()}</PopBox>
+          <AreaBox>{item.area && item.area.toLocaleString()} ㎢</AreaBox>
         </CountriesBox>
       ))}
     </Wrap>
@@ -94,7 +86,7 @@ const CountiresHeader = styled.div`
     justify-content: center;
     h2 {
       font-size: 1.2vw;
-      margin-right: 5px;
+      margin-right: 7px;
     }
   }
 `;
@@ -109,6 +101,11 @@ const CountriesBox = styled.div`
   margin: 15px 0px;
   border-radius: 15px;
   box-shadow: 0px 12px 42px rgba(0, 0, 0, 0.2);
+  :hover {
+    transform: scale(1.03);
+  }
+  transition: all 0.2s linear;
+  cursor: pointer;
   div {
     width: 35%;
     height: 100%;
