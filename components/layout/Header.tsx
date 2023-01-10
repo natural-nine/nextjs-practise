@@ -1,7 +1,14 @@
 import Link from "next/link";
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import Toggle from "./Toggle";
-const Header = () => {
+const Header = ({
+  toggle,
+  setToggle,
+}: {
+  toggle: boolean;
+  setToggle: Dispatch<SetStateAction<boolean>>;
+}) => {
   return (
     <Wrap>
       <HomeBox>
@@ -9,7 +16,7 @@ const Header = () => {
           <h1>Home</h1>
         </Link>
       </HomeBox>
-      <Toggle />
+      <Toggle toggle={toggle} setToggle={setToggle} />
     </Wrap>
   );
 };
@@ -22,12 +29,13 @@ const Wrap = styled.section`
   align-items: center;
   padding: 0px 30px;
   border-bottom: 0.5px solid #bdc3c7;
+  color:${(props) => props.theme.textColor};
 `;
 const HomeBox = styled.div`
   width: 20%;
   h1 {
     font-size: 2vw;
-    color: #252525;
+    color:${(props) => props.theme.textColor};
   }
 `;
 

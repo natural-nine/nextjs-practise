@@ -1,9 +1,14 @@
-import { useState } from "react";
+import { Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import classes from "./toggle.module.css";
 
-const Toggle = () => {
-  const [toggle, setToggle] = useState(false);
+const Toggle = ({
+  toggle,
+  setToggle,
+}: {
+  toggle: boolean;
+  setToggle: Dispatch<SetStateAction<boolean>>;
+}) => {
   const toggleChange = () => {
     setToggle((toggle: boolean) => !toggle);
   };

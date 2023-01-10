@@ -47,10 +47,10 @@ const SearchBar = styled.div`
   justify-content: space-between;
   align-items: center;
   border-bottom: 0.5px solid #bdc3c7;
+  color: ${props => props.theme.textColor};
   h1 {
     font-size: 1.1vw;
   }
-  color: #252525;
 `;
 
 export const getStaticProps = async () => {

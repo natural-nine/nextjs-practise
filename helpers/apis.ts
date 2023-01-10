@@ -18,6 +18,6 @@ export const getCountryByName = async (alphaCode: string) => {
   const response = await axios.get(
     `https://restcountries.com/v2/alpha/${alphaCode}`
   );
-  const data:ICountryDataTypes = response;
+  const data: ICountryDataTypes = response;
   return data;
 };

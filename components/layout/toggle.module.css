@@ -9,6 +9,7 @@
   --toggle-wider: 3em;
   --color-grey: #cccccc;
   --color-green: #4a69bd;
+  cursor: pointer;
 }
 
 .slider {

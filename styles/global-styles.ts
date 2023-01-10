@@ -19,7 +19,8 @@ export const GlobalStyle = createGlobalStyle`
   }
   body {
   box-sizing: border-box;  
-  background-color: #ecf0f1;
+  background-color: ${(props: any) => props.theme.bgColor};
+  transition: all 0.2s linear;
   }
   a {
     color: #000;
