@@ -26,7 +26,7 @@ const Wrap = styled.section`
   display: flex;
   justify-content: space-between;
   margin-top: 50px;
-
+  color: ${(props) => props.theme.textColor};
 `;
 
 const LeftBox = styled.div`
@@ -34,7 +34,7 @@ const LeftBox = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow:${(props) => props.theme.boxShadow};
   border-radius: 10px;
 `;
 const TestMap = styled.div`
@@ -43,6 +43,6 @@ const TestMap = styled.div`
 `;
 const RightBox = styled.div`
   width: 61%;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow:${(props) => props.theme.boxShadow};
   border-radius: 10px;
 `;

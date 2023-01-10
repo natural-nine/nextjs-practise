@@ -55,7 +55,7 @@ const CountriesList = ({
         <Link href={`country/${item.alpha3Code.toLocaleLowerCase()}`}>
           <CountriesBox key={item.name}>
             <NameBox>
-              <Image src={item.flag} width={80} height={35} alt="flag" />
+              <Image src={item.flag} width={90} height={50} alt="flag" />
               <h1>{item.name}</h1>
             </NameBox>
             <PopBox>
@@ -73,6 +73,7 @@ const Wrap = styled.section`
   width: 80%;
   margin: 0 0 0 auto;
   padding: 10px 5px;
+  color: ${props => props.theme.textColor};
 `;
 
 const CountiresHeader = styled.div`
@@ -98,18 +99,18 @@ const CountiresHeader = styled.div`
 
 const CountriesBox = styled.div`
   width: 100%;
-  height: 75px;
+  height: 90px;
   padding: 10px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 15px 0px;
   border-radius: 15px;
-  box-shadow: 0px 12px 42px rgba(0, 0, 0, 0.2);
+  color: ${props => props.theme.textColor};
+  box-shadow: ${props => props.theme.boxShadow};
   :hover {
     transform: scale(1.03);
   }
-  transition: all 0.2s linear;
   cursor: pointer;
   div {
     width: 35%;

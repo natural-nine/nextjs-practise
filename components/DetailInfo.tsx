@@ -11,13 +11,15 @@ const DetailInfo = ({ country }: { country: ICountryTypes }) => {
       </div>
       <div>
         <h1>Language</h1>
-        <h2>{country.languages[0].name}</h2>
+        {country.languages && <h2>{country.languages[0]?.name}</h2>}
       </div>
       <div>
         <h1>Currencies</h1>
-        <h2>
-          {country.currencies[0].name} , {country.currencies[0].symbol}
-        </h2>
+        {country.currencies && (
+          <h2>
+            {country.currencies[0]?.name} , {country.currencies[0]?.symbol}
+          </h2>
+        )}
       </div>
       <div>
         <h1>Nativename</h1>
@@ -49,8 +51,8 @@ const MainBox = styled.section`
     h1 {
       font-size: 1.1vw;
     }
-    h2{
-        font-size: 1.2vw;
+    h2 {
+      font-size: 1.2vw;
     }
   }
 `;

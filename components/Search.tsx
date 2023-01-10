@@ -20,6 +20,10 @@ const SearchInput = styled.input`
   border: none;
   outline: none;
   font-size: 1.1vw;
+  background-color: ${props => props.theme.inputBoxColor};
+  ::placeholder {
+    color: ${props => props.theme.inputTextColor};
+  }
 `;
 
 export default Search;
